@@ -1,45 +1,27 @@
 import streamlit as st
 
-st.set_page_config(page_title="Bir Hediye 💜", layout="centered")
+st.set_page_config(page_title="Sürpriz 🎁", layout="centered")
 
-st.markdown(
-    """
-    <style>
-    body {
-        background-color: #1a001a;
-    }
-    .box {
-        width: 200px;
-        height: 200px;
-        background-color: #5a001a;
-        margin: auto;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 20px;
-        cursor: pointer;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-st.title("🎁")
-
+# Session state başlat
 if "opened" not in st.session_state:
     st.session_state.opened = False
 
+st.title("💝 Sana Küçük Bir Sürpriz 💝")
+
 if not st.session_state.opened:
-    if st.button("KUTUYU AÇ"):
-        name = st.text_input("İsmini gir")
-        if name == "İLKER":
+    name = st.text_input("İsmini yazar mısın? 💌")
+
+    if st.button("Hediyeyi Aç 🎁"):
+        if name.strip() == "":
+            st.warning("Ama isim olmadan olmaz ki 🥺")
+        else:
+            st.session_state.name = name
             st.session_state.opened = True
-        elif name != "":
-            st.error("Yanlış isim 😛")
+            st.rerun()
+
 else:
-    st.success("💐")
-    st.markdown("### 💜 Büyük Mor Bir Buket 💜")
-    if st.button("💌 Zarfı Aç"):
-        st.write("**senin için hazırlandııı<3 -Duru**")
+    st.success(f"Hoş geldin {st.session_state.name} 💖")
+    st.markdown("### 🌸 Bu buket sadece sana 🌸")
+    st.markdown("💐💐💐💐💐")
+    st.markdown("💐💖💐💖💐")
+    st.markdown("💐💐💐💐💐")
